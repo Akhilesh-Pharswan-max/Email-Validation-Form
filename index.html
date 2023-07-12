@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validaiont form</title>
+    <title>Form Validation</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <style>
+        body{
+            font-family:Arial, Helvetica, sans-serif ;
+            font-size: 130%;
+            background-image: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg");
+            background-size: cover;
+        }
+
+        .wraper{
+            position: absolute;
+            border: 5px solid rgb(243, 244, 235) ;
+            border-radius: 10px;
+            width: 690px;
+            height: 300px;
+            top: 25%;
+            left: 25%;
+            text-align: center;
+            
+        }
+
+        label{
+            width: 200px;
+            float: left;
+            position:relative;
+            top: 20px;
+            
+        }
+        input{
+            width: 320px;
+            position:relative;
+            top: 12px;
+            padding: 5px 5px 12px 5px;
+            border-radius: 5px;
+            border-color: transparent;
+            margin:5px;
+            background-blend-mode: screen ;
+            background-color: aliceblue;
+        }
+        #submit{
+           
+            width: 130px; 
+            padding:10px;
+            margin-top: 30px;
+            text-align: center;
+            background-color: rgba(0, 89, 255, 0.76);
+            color:#ffff;
+            
+
+        }
+        #error{
+            color: red;
+            font-size: small;
+            position: absolute;
+            
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="error"></div>
+    <div class="wraper">
+
+    <div class="formelement">
+        <label for="Email">Email</label>
+        <input type="text" id="Email" name="Email" placeholder="Enter email">
+    </div>
+
+    <div class="formelement">
+        <label for="PhoneNo">Phone No.</label>
+        <input type="text" id="PhoneNo" name="PhoneNo" placeholder="Enter Phone no.">
+    </div>
+
+    <div class="formelement">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="Passowrd" placeholder="Enter password">
+    </div>
+
+    <div class="formelement">
+        <label for="confirmpassword">Confirm-Passowrd</label>
+        <input type="password" id="confirmpassword" name="ConfirmPassword" placeholder="Confirm passowrd">
+    </div>
+
+   
+    <input id="submit" type="submit" value="Submit">
+    
+</div>
+    <script>
+             var errormessage= "";
+             var missingfield= "";
+              // Function to validate email
+                 function validateEmail(email) {
+                 // Regular expression for email validation
+                 var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                 return emailPattern.test(email);
+                }
+                 $("#submit").click(function(){
+
+                if (validateEmail($("#Email").val())==false){
+                    errormessage +="<p>Email id is not valid</p>";
+                }
+
+                if ($.isNumeric($("#PhoneNo").val())==false){
+                    errormessage+="<p>Enter the valid Phone no.</p>";
+
+                }
+
+                if($("#password").val() != $("#confirmpassword").val()){
+                    errormessage+="<p>password is not match</p>";
+                }
+                if($("#Email").val() == ""){
+                    missingfield+= "<p>Email id is not filled</p>"
+                }
+
+                if($("#PhoneNo").val() == ""){
+                    missingfield+= "<p>PhoneNo id is not filled</p>"
+                }
+
+                if($("#password").val() == ""){
+                    missingfield+= "<p>Password id is not filled</p>"
+                }
+
+                if($("#confirmpassword").val() == ""){
+                    missingfield+= "<p>confirmPassword id is not filled</p>"
+                }
+               if(errormessage ==""){
+                $("#error").html("<p>you are successfully regestered</p>")
+               }
+                else{
+                    $("#error").html(errormessage + missingfield)
+                }
+               
+            })
+                
+
+    </script>
+    
+
+</body>
+
+</html>
